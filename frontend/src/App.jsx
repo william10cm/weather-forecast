@@ -5,6 +5,8 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [weather, setWeather] = useState(null);
+  const [forecast, setForecast] = useState(null);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,6 +14,8 @@ export default function App() {
     const trimmed = city.trim();
     setError("");
     setWeather(null);
+    setForecast(null);
+
 
     if (!trimmed) {
       setError("Please enter a city.");
@@ -29,6 +33,16 @@ export default function App() {
       }
 
       setWeather(data);
+
+      const forecastRes = await fetch(`/api/forecast?city=${encodeURIComponent(trimmed)}`);
+      const forecastData = await forecastRes.json();
+
+      if (!forecastRes.ok) {
+        setError(forecastData?.error || "Failed to fetch forecast.");
+        return;
+      }
+
+      setForecast(forecastData);
     } catch (err) {
       setError("Network error. Is the backend running on http://localhost:5000 ?");
     } finally {
@@ -77,6 +91,25 @@ export default function App() {
             <p style={{ margin: "6px 0" }}>
               <strong>Wind:</strong> {weather.wind.speed} m/s
             </p>
+          </div>
+        )}
+
+        {forecast && (
+          <div style={{ marginTop: 16 }}>
+            <h3 style={{ marginBottom: 10 }}>5-Day Forecast</h3>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12 }}>
+              {forecast.days.map((day) => (
+                <div
+                  key={day.date}
+                  style={{ padding: 12, border: "1px solid #ddd", borderRadius: 12 }}
+                >
+                  <strong>{day.date}</strong>
+                  <p style={{ margin: "8px 0" }}>{Math.round(day.temp)}°C</p>
+                  <p style={{ margin: 0, opacity: 0.8 }}>{day.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
