@@ -72,7 +72,7 @@ export default function App() {
         {error && <p style={{ color: "crimson" }}>{error}</p>}
 
         {weather && (
-          <div style={{ marginTop: 14, padding: 16, border: "1px solid #ddd", borderRadius: 12 }}>
+          <div style={{ marginTop: 14, padding: 16, border: "1px solid #ddd", borderRadius: 12, backgroundColor: "#F3F1F1" }}>
             <h2 style={{ marginTop: 0 }}>{weather.name}</h2>
 
             <p style={{ margin: "6px 0" }}>
@@ -102,7 +102,7 @@ export default function App() {
               {forecast.days.map((day) => (
                 <div
                   key={day.date}
-                  style={{ padding: 12, border: "1px solid #ddd", borderRadius: 12 }}
+                  style={{ padding: 12, border: "1px solid #ddd", borderRadius: 12, backgroundColor: "#F3F1F1" }}
                 >
                   <strong>{day.date}</strong>
                   <p style={{ margin: "8px 0" }}>{Math.round(day.temp)}°C</p>
