@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: weather-forecast-app-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: OPENWEATHER_API_KEY
+        sync: false
+
+  - type: static
+    name: weather-forecast-app-frontend
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://weather-forecast-app-backend.onrender.com

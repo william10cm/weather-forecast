@@ -1,43 +1,89 @@
-#root {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.weather-app {
+  max-width: 600px;
+  margin: var(--space-10) auto;
+  font-family: var(--font-family-base);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.weather-app-title {
+  margin-bottom: var(--space-2);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.weather-app-subtitle {
+  margin-top: 0;
+  opacity: 0.75;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.weather-form {
+  display: flex;
+  gap: var(--space-2);
 }
 
-.card {
-  padding: 2em;
+.weather-input {
+  flex: 1;
+  padding: var(--space-2_5);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-input);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
 }
 
-.read-the-docs {
-  color: #888;
+.weather-button {
+  padding: var(--space-2_5) var(--space-3_5);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-input);
+  color: var(--text-primary);
+}
+
+.weather-results {
+  margin-top: var(--space-4);
+}
+
+.weather-error {
+  color: var(--color-error);
+}
+
+.weather-card {
+  margin-top: var(--space-3_5);
+  padding: var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-muted);
+}
+
+.weather-city {
+  margin-top: 0;
+}
+
+.weather-row {
+  margin: var(--space-1_5) 0;
+}
+
+.forecast-section {
+  margin-top: var(--space-4);
+}
+
+.forecast-title {
+  margin-bottom: var(--space-2_5);
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-3);
+}
+
+.forecast-card {
+  padding: var(--space-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-muted);
+}
+
+.forecast-temp {
+  margin: var(--space-2) 0;
+}
+
+.forecast-description {
+  margin: 0;
+  opacity: 0.8;
 }

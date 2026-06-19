@@ -1,66 +1,73 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --text-primary: #1f2937;
+  --bg-page: #f8fafc;
+  --bg-page-top: #eef5ff;
+  --bg-surface: #ffffff;
+  --bg-muted: #f3f1f1;
+  --border-subtle: #ddd;
+  --border-input: #ccc;
+  --focus-ring: #3b82f6;
+  --color-error: crimson;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --space-1: 4px;
+  --space-1_5: 6px;
+  --space-2: 8px;
+  --space-2_5: 10px;
+  --space-3: 12px;
+  --space-3_5: 14px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-10: 40px;
+
+  font-family: var(--font-family-base);
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color: var(--text-primary);
+  background-color: var(--bg-page);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(to bottom, var(--bg-page-top) 0%, var(--bg-page) 40%, var(--bg-page) 100%);
+  color: var(--text-primary);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#root {
+  min-height: 100vh;
+  padding: var(--space-6) var(--space-4);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+input,
+button {
+  font: inherit;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  background-color: var(--bg-surface);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background: linear-gradient(to right, #74ebd5, #9face6);
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: var(--space-1);
 }

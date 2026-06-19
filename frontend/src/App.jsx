@@ -1,4 +1,7 @@
 import { useState } from "react";
+import "./App.css";
+
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
 
 export default function App() {
   const [city, setCity] = useState("");
@@ -24,7 +27,7 @@ export default function App() {
 
     try {
       setLoading(true);
-      const res = await fetch(`/api/weather?city=${encodeURIComponent(trimmed)}`);
+      const res = await fetch(`${API_BASE_URL}/api/weather?city=${encodeURIComponent(trimmed)}`);
       const data = await res.json();
 
       if (!res.ok) {
@@ -34,7 +37,7 @@ export default function App() {
 
       setWeather(data);
 
-      const forecastRes = await fetch(`/api/forecast?city=${encodeURIComponent(trimmed)}`);
+      const forecastRes = await fetch(`${API_BASE_URL}/api/forecast?city=${encodeURIComponent(trimmed)}`);
       const forecastData = await forecastRes.json();
 
       if (!forecastRes.ok) {
@@ -51,62 +54,62 @@ export default function App() {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: "40px auto", fontFamily: "system-ui, Arial" }}>
-      <h1 style={{ marginBottom: 8 }}>Weather Forecast</h1>
-      <p style={{ marginTop: 0, opacity: 0.75 }}>Search current weather by city.</p>
+    <div className="weather-app">
+      <h1 className="weather-app-title">Weather Forecast</h1>
+      <p className="weather-app-subtitle">Search current weather by city.</p>
 
-      <form onSubmit={handleSubmit} style={{ display: "flex", gap: 8 }}>
+      <form onSubmit={handleSubmit} className="weather-form">
         <input
           value={city}
           onChange={(e) => setCity(e.target.value)}
           placeholder="Try: London"
-          style={{ flex: 1, padding: 10, borderRadius: 8, border: "1px solid #ccc" }}
+          className="weather-input"
         />
-        <button style={{ padding: "10px 14px", borderRadius: 8, border: "1px solid #ccc" }}>
+        <button className="weather-button">
           Search
         </button>
       </form>
 
-      <div style={{ marginTop: 16 }}>
+      <div className="weather-results">
         {loading && <p>Loading...</p>}
-        {error && <p style={{ color: "crimson" }}>{error}</p>}
+        {error && <p className="weather-error">{error}</p>}
 
         {weather && (
-          <div style={{ marginTop: 14, padding: 16, border: "1px solid #ddd", borderRadius: 12, backgroundColor: "#F3F1F1" }}>
-            <h2 style={{ marginTop: 0 }}>{weather.name}</h2>
+          <div className="weather-card">
+            <h2 className="weather-city">{weather.name}</h2>
 
-            <p style={{ margin: "6px 0" }}>
+            <p className="weather-row">
               <strong>Temp:</strong> {Math.round(weather.main.temp)}°C (feels like{" "}
               {Math.round(weather.main.feels_like)}°C)
             </p>
 
-            <p style={{ margin: "6px 0" }}>
+            <p className="weather-row">
               <strong>Condition:</strong> {weather.weather[0].description}
             </p>
 
-            <p style={{ margin: "6px 0" }}>
+            <p className="weather-row">
               <strong>Humidity:</strong> {weather.main.humidity}%
             </p>
 
-            <p style={{ margin: "6px 0" }}>
+            <p className="weather-row">
               <strong>Wind:</strong> {weather.wind.speed} m/s
             </p>
           </div>
         )}
 
         {forecast && (
-          <div style={{ marginTop: 16 }}>
-            <h3 style={{ marginBottom: 10 }}>5-Day Forecast</h3>
+          <div className="forecast-section">
+            <h3 className="forecast-title">5-Day Forecast</h3>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12 }}>
+            <div className="forecast-grid">
               {forecast.days.map((day) => (
                 <div
                   key={day.date}
-                  style={{ padding: 12, border: "1px solid #ddd", borderRadius: 12, backgroundColor: "#F3F1F1" }}
+                  className="forecast-card"
                 >
                   <strong>{day.date}</strong>
-                  <p style={{ margin: "8px 0" }}>{Math.round(day.temp)}°C</p>
-                  <p style={{ margin: 0, opacity: 0.8 }}>{day.description}</p>
+                  <p className="forecast-temp">{Math.round(day.temp)}°C</p>
+                  <p className="forecast-description">{day.description}</p>
                 </div>
               ))}
             </div>

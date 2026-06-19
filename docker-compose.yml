@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: weather-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+      - PORT=5000
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: ""
+    container_name: weather-frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
